@@ -1,0 +1,98 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Play King’s Judgment — a leadership IQ game with 12 levels and beautiful graphics." />
+  <title>King's Judgment Game</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: url('https://images.unsplash.com/photo-1611567795473-2df5e71d7c73?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .game-box {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: gold;
+      color: black;
+      cursor: pointer;
+    }
+    #question { font-size: 20px; margin: 20px 0; }
+    .certificate { display: none; font-size: 22px; margin-top: 20px; background: green; padding: 15px; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <div class="game-box">
+    <h1>King's Judgment</h1>
+    <p id="question">Loading game...</p>
+    <button onclick="answer('Yes')">Yes</button>
+    <button onclick="answer('No')">No</button>
+    <p id="feedback"></p>
+    <div class="certificate" id="certificate"></div>
+  </div>
+
+  <script>
+    const levels = [
+      ["A farmer asks to lower taxes. Do you agree?", "Yes"],
+      ["A prisoner begs for mercy. Will you pardon him?", "No"],
+      ["Your advisor suggests war. Do you support it?", "No"],
+      ["The queen wants a grand feast. Do you approve?", "Yes"],
+      ["Citizens demand clean water. Will you fund it?", "Yes"],
+      ["A knight disobeyed. Will you punish him?", "No"],
+      ["Spies suggest treason. Will you investigate?", "Yes"],
+      ["A scholar asks for library funds. Do you grant?", "Yes"],
+      ["Nobles want to raise their pay. Do you accept?", "No"],
+      ["Villagers want to build a school. Do you help?", "Yes"],
+      ["A thief stole food. Will you jail him?", "No"],
+      ["The army wants more weapons. Will you approve?", "No"]
+    ];
+
+    let index = 0;
+    let score = 0;
+
+    function showQuestion() {
+      if (index < levels.length) {
+        document.getElementById("question").innerText = levels[index][0];
+      } else {
+        document.getElementById("question").innerText = "Game Over!";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("certificate").style.display = "block";
+        document.getElementById("certificate").innerText = `Congratulations! Your final score is ${score}/${levels.length}. You’ve completed all levels and earned the Grand Certificate!`;
+      }
+    }
+
+    function answer(choice) {
+      let correct = levels[index][1];
+      let feedback = document.getElementById("feedback");
+      if (choice === correct) {
+        score++;
+        feedback.innerText = "Wise choice, Your Majesty.";
+      } else {
+        feedback.innerText = "That may cause trouble, Sire...";
+      }
+      index++;
+      setTimeout(() => {
+        feedback.innerText = "";
+        showQuestion();
+      }, 1000);
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
