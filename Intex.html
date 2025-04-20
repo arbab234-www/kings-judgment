@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>King's Judgment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>King's Judgment</h1>
+    <div id="game">
+      <p id="question"></p>
+      <div id="choices">
+        <button onclick="answer('yes')">Yes</button>
+        <button onclick="answer('no')">No</button>
+      </div>
+      <p id="feedback"></p>
+      <button id="next" onclick="nextQuestion()" style="display:none;">Next</button>
+    </div>
+    <div id="summary" style="display:none;"></div>
+    <div id="certificate" style="display:none;"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
